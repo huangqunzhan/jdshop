@@ -1,0 +1,58 @@
+<div class="table-responsive">
+											<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+												<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+												<thead>
+													<tr role="row"><th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" style="width: 73.2px;" aria-label="
+															
+																
+																
+															
+														">
+															<label>
+																<input class="ace" type="checkbox">
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="width: 198.2px;" aria-label="Domain: activate to sort column ascending">ID</th>
+														<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="width: 137.2px;" aria-label="Price: activate to sort column ascending">关键字名称</th>
+														<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" style="width: 148.2px;" aria-label="Clicks: activate to sort column ascending">操作</th></tr>
+												</thead>
+
+												
+											<tbody role="alert" aria-live="polite" aria-relevant="all">
+												{volist name="keywords_list" id="vo"}
+												<tr class="odd">
+														<td class="center  sorting_1">
+															<label>
+																<input class="ace" type="checkbox">
+																<span class="lbl"></span>
+															</label>
+														</td>
+
+														<td class=" ">
+															<a href="#">{$vo.keywords_id}</a>
+														</td>
+														
+
+														<td class="hidden-480 ">
+															{$vo.keywords_name}
+														</td>
+
+
+														<td class=" ">
+															<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+																
+																<a class="green" href="{:url('keywords/keywordsupdate',['cate_id'=>$vo.keywords_id])}">
+																	<i class="icon-pencil bigger-130"></i>
+																</a>
+
+																<a class="red" href="{:url('keywords/keywordsdelete',['cate_id'=>$vo.keywords_id])}">
+																	<i class="icon-trash bigger-130"></i>
+																</a>
+															</div>															
+														</td>
+														{/volist}
+													</tbody>
+												</table>
+											</div>
+										</div>

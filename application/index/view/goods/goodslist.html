@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>商品列表</title>
+
+		<link href="__INDEX__/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+		<link href="__INDEX__/assets/css/admin.css" rel="stylesheet" type="text/css" />
+
+		<link href="__INDEX__/basic/css/demo.css" rel="stylesheet" type="text/css" />
+
+		<link href="__INDEX__/css/seastyle.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="__INDEX__/basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="__INDEX__/js/script.js"></script>
+	</head>
+
+	<style type="text/css">
+		#page li{
+			display: inline;
+			width: 30px;
+			height: 30px;
+		}
+	</style>
+	
+
+	<body>
+		{include file="public/top"}
+
+			<div class="clear"></div>
+			<b class="line"></b>
+           <div class="search">
+			<div class="search-list">
+			<div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="{:url('index/index')}">首页</a></li>
+                                <li class="qc"><a href="#">闪购</a></li>
+                                <li class="qc"><a href="#">限时抢</a></li>
+                                <li class="qc"><a href="#">团购</a></li>
+                                <li class="qc last"><a href="#">大包装</a></li>
+							</ul>
+						    <div class="nav-extra">
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div>
+						</div>
+			</div>
+			
+				
+					<div class="am-g am-g-fixed">
+						<div class="am-u-sm-12 am-u-md-12">
+	                  	<div class="theme-popover">														
+							
+							
+							<div class="clear"></div>
+                        </div>
+							<div class="search-content">
+								<div class="sort">
+									<li class="first"><a title="综合">综合排序</a></li>
+									<li><a title="销量"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_sales'))}">销量排序</a></li>
+									<li><a title="价格"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_acs'))}">价格最低</a></li>
+									<li><a title="价格"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_desc'))}">价格最高</a></li>
+									<li class="big"><a title="评价" href="#">评价为主</a></li>
+								</div>
+								<div class="clear"></div>
+
+								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+									{volist name="$goods_info" id="vo"}
+									<li>
+										<a href="{:url('goods/introduction',['goods_id'=>$vo.goods_id])}">
+											<div class="i-pic limit">
+												<img src="{$vo.goods_thumb}" />											
+												<p class="title fl">{$vo.goods_name}
+													{volist name="$vo.keywords" id="vo1"}
+													{$vo1.keywords_name}&nbsp;
+													{/volist}
+												</p>
+												<p class="price fl">
+													
+													{if condition="$vo.goods_after_price eq 0"}
+														<b>¥</b><strong>{$vo.goods_price}</strong>				
+													{else/}
+														<em>¥</em><strong>{$vo.goods_after_price}</strong>														
+													{/if}
+												</p>
+												<p class="number fl">
+													销量<span>{$vo.goods_sales}</span>
+												</p>
+										</div>
+										</a>
+									</li>
+									{/volist}
+								</ul>
+							</div>
+							<div class="search-side">
+
+								
+
+								
+
+							</div>
+							<div class="clear"></div>
+							<!--分页 -->
+							<ul class="am-pagination am-pagination-right" id="page">
+								
+							</ul>
+
+						</div>
+					</div>
+					<div class="footer">
+						<div class="footer-hd">
+							<p>
+								<a href="#">恒望科技</a>
+								<b>|</b>
+								<a href="#">商城首页</a>
+								<b>|</b>
+								<a href="#">支付宝</a>
+								<b>|</b>
+								<a href="#">物流</a>
+							</p>
+						</div>
+						<div class="footer-bd">
+							<p>
+								<a href="#">关于恒望</a>
+								<a href="#">合作伙伴</a>
+								<a href="#">联系我们</a>
+								<a href="#">网站地图</a>
+								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		<!--引导 -->
+		<div class="navCir">
+			<li><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
+			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
+			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
+			<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+		</div>
+
+		<!--菜单 -->
+		{include file="public/tip"}
+		<script>
+			window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
+		</script>
+		<script type="text/javascript" src="__INDEX__/basic/js/quick_links.js"></script>
+
+<div class="theme-popover-mask"></div>
+
+	</body>
+
+</html>
