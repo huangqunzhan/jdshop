@@ -239,6 +239,10 @@
 																<a class="red" href="{:url('goods/deletegood',['goods_id'=>$vo.goods_id])}">
 																	<i class="icon-trash bigger-130"></i>
 																</a>
+
+																<a class="green" href="{:url('goods/addproperty',array('goods_id'=>$vo.goods_id))}">
+																	<i class="icon-plus bigger-130"></i>
+																</a>
 															</div>															
 														</td>
 														{/volist}

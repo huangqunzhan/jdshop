@@ -23,5 +23,10 @@ class Goods extends \think\Model
 	public function img(){
 		return $this->hasMany('Img','goods_id');
 	}
+
+	public function goodsproperty(){
+		//商品的细节图的一对多关系
+		return $this->hasMany('Goodsproperty');
+	}
 }
 ?>

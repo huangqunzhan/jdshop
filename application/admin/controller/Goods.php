@@ -540,5 +540,71 @@ class Goods extends \think\Controller
 	         }
 	    }
 	}
+	//添加商品属性
+	public function addproperty($goods_id=''){
+		if ($goods_id=='') {
+			$this->redirect('goods/goodslist');
+		}
+		$goods_id_data=Db::table('jdshop_goods')->where('goods_id','eq',$goods_id)->find();
+		if (empty($goods_id_data)) {
+			$this->redirect('goods/goodslist');
+		}
+		$this->assign('goods_id_data',$goods_id_data);
+		$property_pid=$goods_id_data['goods_pid'];
+		$property_data=Db::table('jdshop_property')->where('property_pid','eq',$property_pid)->select();
+		//dump($property_data);die;
+		$goods_model=model('Goods');
+		$goods=$goods_model->get($goods_id);
+		$goodsproperty_select=$goods->goodsproperty()->select();
+		$goodsproperty_select_toArray=$goodsproperty_select->toArray();
+		$this->assign('goodsproperty_select_toArray',$goodsproperty_select_toArray);
+		$this->assign('property_data',$property_data);
+		return $this->fetch();
+	}
+	//添加商品属性处理
+	public function addgoodspropertyhandle(){
+		$post=request()->post();
+		//dump($post);
+		$goods_id=$post['goods_id'];
+		//dump($goods_id);die;
+		$goods_model=model('Goods');
+		$goods=$goods_model->get($goods_id);
+		$goodsproperty_select=$goods->goodsproperty()->select();
+		$goodsproperty_select_toArray=$goodsproperty_select->toArray();
+		//获取到指定商品id的属性id
+		$goodsproperty_propertyid = array_column($goodsproperty_select_toArray,'property_id');
+		//dump($goodsproperty_select_toArray);
+		//dump($goodsproperty_propertyid);die;
+		foreach ($post as $key => $value) {
+			/**
+			提交数据的四种情况
+			1、原有属性已存在，新的属性不为空。进行更新。
+			2、原有属性已存在，新的属性为空，进行删除。
+			3、原有属性不存在，新的属性不为空，进行添加。
+			4、原有属性不存在，新的属性为空，do nothing。
+			*/
+			//$post里面含有'goods_id'和'goods_name'字段
+			if($key!='goods_id'&&$key!='goods_name'){
+				//$goods->goodsproperty()->save(['property_id'=>$key,'goodsproperty_content'=>$value]);
+				//数组匹配,提交数据项已存在，进行更新
+				if (in_array($key, $goodsproperty_propertyid)) {
+					//dump(in_array($key, $goodsproperty_propertyid));
+					if ($value=='') {
+						//数据为空的时候删除删除数据
+						Db::table('jdshop_goodsproperty')->where(['property_id'=>$key,'goods_id'=>$goods_id])->delete();
+					}else{
+						//数据不为空的时候进行数据的更新
+						Db::table('jdshop_goodsproperty')->where(['property_id'=>$key,'goods_id'=>$goods_id])->update(['goodsproperty_content'=>$value]);
+					}
+				}else{
+					//提交一个新的数据项，进行添加
+					if ($value!='') {
+						$goods->goodsproperty()->save(['property_id'=>$key,'goodsproperty_content'=>$value]);
+					}
+				}
+			}
+		}
+		$this->redirect('goods/goodslist');
+	}
 }
 ?>
