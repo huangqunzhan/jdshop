@@ -440,8 +440,11 @@ class Goods extends \think\Controller
 			}
 			//删除商品与细节图一对多关系
 			$goods_img_delete=Db::table('jdshop_img')->where('goods_id',$goods_id)->delete();
+			//可以直接把商品id与相关模型关联，直接删除商品id
+			//删除属性名和商品属性
+			$goodsproperty_delete=Db::table('jdshop_goodsproperty')->where('goods_id',$goods_id)->delete();
 			//用或的原因是防止有的商品没有添加细节图或没有添加关键字
-			if ($goods_keywords_delete || $goods_id_data_delete || $goods_img_delete) {
+			if ($goods_keywords_delete || $goods_id_data_delete || $goods_img_delete || $goodsproperty_delete) {
 				$this->success('删除商品信息成功','goods/goodslist');
 			}
 		}else{
@@ -564,7 +567,7 @@ class Goods extends \think\Controller
 	//添加商品属性处理
 	public function addgoodspropertyhandle(){
 		$post=request()->post();
-		//dump($post);
+		//dump($post);die;
 		$goods_id=$post['goods_id'];
 		//dump($goods_id);die;
 		$goods_model=model('Goods');
@@ -597,7 +600,7 @@ class Goods extends \think\Controller
 						Db::table('jdshop_goodsproperty')->where(['property_id'=>$key,'goods_id'=>$goods_id])->update(['goodsproperty_content'=>$value]);
 					}
 				}else{
-					//提交一个新的数据项，进行添加
+					//提交一个新的数据项，进行添加,新添加的属性
 					if ($value!='') {
 						$goods->goodsproperty()->save(['property_id'=>$key,'goodsproperty_content'=>$value]);
 					}

@@ -77,10 +77,10 @@ class Property extends \think\Controller
 		if (empty($property_id_data)) {
 			$this->redirect('property/propertylist');
 		}
-		$cate_select=Db::table('jdshop_cate')->order('cate_sort')->select();
+		$cate_select=Db::table('jdshop_cate')->select();
 		$cate_model=model('Cate');
 		$cate_list1=$cate_model->getChildren($cate_select);
-		//dump($cate_list1);die;
+		//dump($cate_list1);
 		$cate_list2=$cate_model->getFatherId($cate_select,$property_id_data['property_pid']);
 		//dump($cate_list2);die;
 		//$cate_list3=$cate_model->getFather($cate_select,$goods_id_data['goods_pid']);
@@ -104,15 +104,31 @@ class Property extends \think\Controller
 		$update_goods_property=Db::table('jdshop_property')->where('property_id',$property_id)->update($post);
 		//   0不恒等于false
 		if ($update_goods_property!==false) {
-			$this->success('修改商品信息成功','property/propertylist');
+			$this->success('修改商品属性名成功','property/propertylist');
 		}else{
-			$this->error('修改商品信息成功','property/propertylist');
+			$this->error('修改商品属性名失败','property/propertylist');
 		}
-
 	}
-	//商品属性的删除
+	//属性名删除
 	public function deleteproperty($property_id=''){
-		
+		if ($property_id=='') {
+			$this->redirect('property/propertylist');
+		}
+		$property_data=Db::table('jdshop_property')->where('property_id',$property_id)->find();
+		if (empty($property_data)) {
+			$this->redirect('property/propertylist');
+		}
+		$property_delete=Db::table('jdshop_property')->where('property_id',$property_id)->delete();
+		if ($property_delete) {
+			$goodsproperty_delete=Db::table('jdshop_goodsproperty')->where('property_id',$property_id)->delete();
+			if ($goodsproperty_delete) {
+				$this->success('删除属性名成功','property/propertylist');
+			}else{
+				$this->error('删除属性名失败','property/propertylist');
+			}
+		}else{
+			$this->error('删除属性名失败','property/propertylist');
+		}
 	}
 }
 ?>

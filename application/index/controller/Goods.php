@@ -44,7 +44,7 @@ class Goods extends \think\Controller
 		$goods_model=new \app\admin\model\Goods;
 		//$cate_model=new \app\admin\model\Cate;
 		$keywords_model=new \app\admin\model\Keywords;
-
+		//带参数的闭包查询
 	 	$goods_all=$goods_model->all(function($query) use ($goods_pid) {$query->where('goods_pid',$goods_pid)->where('goods_status','1');});
 		//$goods_all=Db::table('jdshop_goods')->where('goods_pid',$goods_pid)->where('goods_status','1')->order($goods_order)->select();
 		//dump($goods_all);die;
@@ -84,16 +84,35 @@ class Goods extends \think\Controller
 			$this->redirect('index/index');
 		}
 		$goods_find=Db::table('jdshop_goods')->where('goods_id',$goods_id)->select();
+		//dump($goods_find);
 		if (empty($goods_find)) {
 			$this->redirect('index/index');
 		}
 		$goods_model=new \app\admin\model\Goods;
 		$goods_get=$goods_model->get($goods_id);
 		$goods_get_toArray=$goods_get->toArray();
-
+		//dump($goods_get_toArray);
+		//关联关键字
 		$goods_keywords=$goods_get->keywords;
 		$goods_keywords_toArray=$goods_keywords->toArray();
 		$goods_get_toArray['keywords']=$goods_keywords_toArray;
+		//关联细节图
+		$goods_img=$goods_get->img;
+		$goods_img_toArray=$goods_img->toArray();
+		$goods_get_toArray['img']=$goods_img_toArray;
+		//关联商品属性
+		$goods_goodsproperty=$goods_get->goodsproperty;
+		$goods_goodsproperty_toArray1=$goods_goodsproperty->toArray();
+		//dump($goods_goodsproperty_toArray1);
+		$goods_goodsproperty_toArray=array();
+		foreach ($goods_goodsproperty_toArray1 as $key => $value) {
+			$property_name=Db::table('jdshop_property')->where('property_id',$value['property_id'])->find();
+			$value['property_name']=$property_name['property_name'];
+			$goods_goodsproperty_toArray[]=$value;
+		}
+		
+		//dump($goods_goodsproperty_toArray);die;
+		$goods_get_toArray['goodsproperty']=$goods_goodsproperty_toArray;
 		//dump($goods_get_toArray);die;
 		$this->assign('goods_info',$goods_get_toArray);
 
