@@ -31,7 +31,6 @@ class Goods extends \think\Controller
 			$this->redirect('index/index');
 		}
 		$this->assign('goods_pid',$goods_pid);
-
 		if($goods_order=='goods_sales'){
 			$goods_order='goods_sales acs';
 		}elseif ($goods_order=='goods_price_acs') {
@@ -41,11 +40,15 @@ class Goods extends \think\Controller
 		}else{
 			$goods_order='goods_id';
 		}
+		//dump($goods_order);die;
 		$goods_model=new \app\admin\model\Goods;
 		//$cate_model=new \app\admin\model\Cate;
 		$keywords_model=new \app\admin\model\Keywords;
 		//带参数的闭包查询
-	 	$goods_all=$goods_model->all(function($query) use ($goods_pid) {$query->where('goods_pid',$goods_pid)->where('goods_status','1');});
+		$goods_all = $goods_model->all(function($query) use ($goods_pid,$goods_order){
+			$query->where('goods_pid','eq',$goods_pid)->where('goods_status','eq','1')->order($goods_order);
+		});
+	 	//$goods_all=$goods_model->all(function($query) use ($goods_pid) {$query->where('goods_pid',$goods_pid)->where('goods_status','1')->order($goods_order);});
 		//$goods_all=Db::table('jdshop_goods')->where('goods_pid',$goods_pid)->where('goods_status','1')->order($goods_order)->select();
 		//dump($goods_all);die;
 		//dump($goods_all);
