@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>控制台 - Bootstrap后台管理系统模版Ace下载</title>
+		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
+		<meta name="description" content="JS代码网提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- basic styles -->
+		<link href="__ADMIN__/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__ADMIN__/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="__ADMIN__/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="__ADMIN__/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="__ADMIN__/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="__ADMIN__/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="__ADMIN__/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="__ADMIN__/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="__ADMIN__/assets/js/html5shiv.js"></script>
+		<script src="__ADMIN__/assets/js/respond.min.js"></script>
+		<![endif]-->
+		
+	</head>
+
+	<body>
+		<!-- 导航栏 -->
+		{include file="public/navbar"}
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!-- sidebar -->
+				{include file="public/sidebar"}
+				<!-- /sidebar -->
+
+				<div class="main-content">
+					
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								管理员管理
+								<small>
+									<i class="icon-double-angle-right"></i>
+									 添加管理员
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<form class="form-horizontal" role="form" onsubmit="return checkresult()" action="{:url('admin/addadminhandle')}" method="post">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="admin_name"> 管理员名称 </label>
+
+										<div class="col-sm-9">
+											<input id="admin_name" name="admin_name" required="" placeholder="请输入管理员名称" class="col-xs-10 col-sm-5" type="text" onblur="checkadminname()">&nbsp;&nbsp;&nbsp;<span></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="admin_password"> 管理员密码 </label>
+
+										<div class="col-sm-9">
+											<input id="admin_password" name="admin_password" required="" placeholder="请输入管理员密码" class="col-xs-10 col-sm-5" type="text" onblur="checkadminpassword()">&nbsp;&nbsp;&nbsp;<span></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="admin_repassword"> 确认密码 </label>
+
+										<div class="col-sm-9">
+											<input id="admin_repassword" name="admin_repassword" required="" placeholder="确认管理员密码" class="col-xs-10 col-sm-5" type="text" onblur="checkadminrepassword()">&nbsp;&nbsp;&nbsp;<span></span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+										<input type="submit" name="" value="添加管理员" class="btn btn-info">
+										<input type="reset" name="" value="重置" class="btn">
+										</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+
+					</div><!-- /.page-content -->
+
+							
+						
+
+								
+				
+						
+					
+
+				</div><!-- /.main-content -->
+
+				
+			</div><!-- /.main-container-inner -->
+
+			
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+		 <script src="__ADMIN__/assets/js/jquery-2.0.3.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='__ADMIN__/assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='__ADMIN__/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='__ADMIN__/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+		</script>
+		<script src="__ADMIN__/assets/js/bootstrap.min.js"></script>
+		<script src="__ADMIN__/assets/js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--[if lte IE 8]>
+		  <script src="__ADMIN__/assets/js/excanvas.min.js"></script>
+		<![endif]-->
+
+		<script src="__ADMIN__/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="__ADMIN__/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="__ADMIN__/assets/js/jquery.slimscroll.min.js"></script>
+		<script src="__ADMIN__/assets/js/jquery.easy-pie-chart.min.js"></script>
+		<script src="__ADMIN__/assets/js/jquery.sparkline.min.js"></script>
+		<script src="__ADMIN__/assets/js/flot/jquery.flot.min.js"></script>
+		<script src="__ADMIN__/assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="__ADMIN__/assets/js/flot/jquery.flot.resize.min.js"></script>
+
+		<!-- ace scripts -->
+
+		<script src="__ADMIN__/assets/js/ace-elements.min.js"></script>
+		<script src="__ADMIN__/assets/js/ace.min.js"></script>
+		<script src="__ADMIN__/validform/validform.js"></script>
+		<!-- <script type="text/javascript">
+			$(function(){
+				var demo = $(".form-horizontal").Validform({
+					tiptype:4, 
+				});
+				demo.addRule([
+					{
+						ele:"#admin_name",
+						datatype:"s1-10",
+						nullmsg:"请输入管理员名称！",
+						errormsg:"管理员名称为1~10位",
+						sucmsg:"管理员名称可以使用！",
+						ajaxurl:'{:url("admin/admin/checkadminname")}'
+					},
+					{
+						ele:"#admin_password",
+						datatype:"s8-20",
+						nullmsg:"请输入密码！",
+						errormsg:"密码长度为8到20位",
+						sucmsg:"密码符合要求",
+					},
+					{
+						ele:"#admin_repassword",
+						datatype:"s8-20",
+						nullmsg:"请再次输入密码！",
+						errormsg:"两次密码输入不一致",
+						sucmsg:"密码符合要求",
+						recheck:"admin_password"
+					}	
+				])
+			})
+		</script> -->
+
+		<!-- inline scripts related to this page -->
+		<!-- ajax验证用户名是否存在 -->
+		<script type="text/javascript">
+			$(function(){
+				$("#admin_name").on('blur',function(){
+					var admin_name = $("#admin_name").val();
+					//alert(admin_name);
+					$.ajax({
+						url:"{:url('admin/admin/checkadminname')}",
+						data:{'admin_name':admin_name},//传递到处理页面的值，也可以是json数据，要用{}，如果传两个值就在{}里加逗号
+						type:"post",//传值方式
+						dataType:"json",
+						success:function(data){
+							//alert(data.info);
+							$("#admin_name").next("span").html(data.info);
+							if (data.status=='0' || data.status=='-1' || data.status=='-2') {
+								$("#admin_name").next("span").css("color","red");
+								return false;
+							}else{
+								$("#admin_name").next("span").css("color","green");
+								return true;
+							}
+						}
+
+					})
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#admin_password").on("blur",function(){
+					var admin_password=$("#admin_password").val();
+					$.ajax({
+						url:"{:url('admin/admin/checkpassword')}",
+						data:{'admin_password':admin_password},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							
+							if (data.status=='-1' || data.status=='-2') {
+								$("#admin_password").next("span").html(data.info);
+								$("#admin_password").next("span").css("color","red");
+								return false;
+							}else {
+								$("#admin_password").next("span").html(data.info);
+								$("#admin_password").next("span").css("color","green");
+								return true;
+							}
+						}
+					})
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#admin_repassword").on('blur',function(){
+					var admin_repassword=$("#admin_repassword").val();
+					var admin_password=$("#admin_password").val();
+					$.ajax({
+						url:"{:url('admin/admin/checkrepassword')}",
+						data:{'admin_repassword':admin_repassword,'admin_password':admin_password},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							
+							if (data.status=='-1' || data.status=='-2') {
+								$("#admin_repassword").next("span").html(data.info);
+								$("#admin_repassword").next("span").css("color","red");
+								return false;
+							}else{
+								$("#admin_repassword").next("span").html(data.info);
+								$("#admin_repassword").next("span").css("color","green");
+								return true;
+							}
+						}
+					})
+				})
+			})
+		</script>
+		<!-- <script type="text/javascript">
+			function checkresult(){
+				alert(checkadminname());
+				if (checkadminname()&&checkrepassword()&&checkadminrepassword()) {
+					return true;
+				}else{
+					return false;
+				}
+			}
+		</script> -->
+	</body>
+</html>
+
