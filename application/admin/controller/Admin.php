@@ -5,7 +5,7 @@ use think\Request;
 /**
 * 管理员控制器
 */
-class Admin extends \think\Controller
+class Admin extends Common
 {
 	//管理员列表
 	public function adminlist(){

@@ -6,7 +6,7 @@ use \think\Request;
 /**
 * 分类管理控制器
 */
-class Cate extends \think\Controller
+class Cate extends Common
 {
 	//商品分类
 	public function catelist(){

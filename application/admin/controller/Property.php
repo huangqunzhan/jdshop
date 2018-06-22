@@ -6,7 +6,7 @@ use think\Request;
 /**
 * 商品属性控制器
 */
-class Property extends \think\Controller
+class Property extends Common
 {
 	//属性列表
 	public function propertylist($property_pid=''){

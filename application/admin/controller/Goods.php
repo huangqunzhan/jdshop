@@ -12,7 +12,7 @@ if(!isset($_SESSION['imgupload'])){
 /**
 * 商品添加列表
 */
-class Goods extends \think\Controller
+class Goods extends Common
 {
 	//添加商品
 	public function addgoods(){

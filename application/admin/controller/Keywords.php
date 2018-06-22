@@ -6,7 +6,7 @@ use think\Request;
 /**
 * 
 */
-class Keywords extends \think\Controller
+class Keywords extends Common
 {
 	//关键字列表
 	public function keywordslist(){
