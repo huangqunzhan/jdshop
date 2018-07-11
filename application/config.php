@@ -248,5 +248,11 @@ return [
         'reset'=>true,
         'fontSize'=>18,
         'useNoise'=>false,
-    ]
+    ],
+
+    //邮箱设置
+    'MAIL_ADDRESS'=>'577842700@qq.com', // 邮箱地址
+    'MAIL_SMTP'=>'smtp.qq.com', // 邮箱SMTP服务器
+    'MAIL_LOGINNAME'=>'577842700@qq.com', // 邮箱登录帐号
+    'MAIL_PASSWORD'=>'ewavayuefadobfhh', // 邮箱密码
 ];

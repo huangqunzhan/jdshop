@@ -31,6 +31,7 @@ class Property extends Common
 			// $value['fatherid']=$cate_model->getFather($cate_select,$property_pid);
 			// $property_select_fatherid[]=$value;
 			$father=$cate_model->getFather($cate_select,$property_pid);
+			//dump($father);die;
 			$value['father'][]=$father['0']['father']['0']['father']['0']['cate_name'];
 			$value['father'][]=$father['0']['father']['0']['cate_name'];
 			$value['father'][]=$father['0']['cate_name'];

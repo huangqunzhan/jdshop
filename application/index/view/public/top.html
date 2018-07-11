@@ -3,8 +3,13 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="{:url('login/login')}" target="_top" class="h">亲，请登录</a>
-						<a href="{:url('register/register')}" target="_top">免费注册</a>
+						{if condition="$Think.session.user_email"}
+						欢迎{$Think.session.user_email}&nbsp;&nbsp;&nbsp;
+						<a href="{:url('user/login/loginout')}" target="_top" class="h">退出</a>&nbsp;&nbsp;&nbsp;
+						{else/}
+						<a href="{:url('user/login/login')}" target="_top" class="h">亲，请登录</a>
+						{/if}
+						<a href="{:url('user/register/register')}" target="_top">免费注册</a>
 					</div>
 				</div>
 			</ul>
